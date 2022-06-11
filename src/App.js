@@ -16,7 +16,7 @@ function App() {
   const displayJoke = () => {
     fetch(JOKE_API+'?firstName='+words[0]+'&lastName='+words[1]+'&limitTo=['+category+']')
      .then(res => res.json())
-     .then(data => setJoke('"'+data.value.joke+'"'))
+     .then(data => setJoke(data.value.joke))
   };
 
   const getCategoryList = () => {
@@ -26,11 +26,9 @@ function App() {
   };
 
   const getJokeList = () => {
-    console.log(number);
     fetch(JOKE_API+'/'+number)
      .then(res => res.json())
      .then(data => setJokeList(data.value))
-    console.log(jokeList.length);
   };
 
   const downloadTxtFile = () => {
@@ -43,35 +41,36 @@ function App() {
     document.body.appendChild(element);
     element.click();
   };
-
+  
   const saveJokes = () => {
     getJokeList();
     for (let i = 0; i < jokeList.length; i++) {
-    jokeList[i] = jokeList[i].joke+'\n'
+      jokeList[i] = jokeList[i].joke+'\n'
     }
-    //console.log(number,jokeList);
-    //downloadTxtFile();
+    downloadTxtFile();
   }
 
   useEffect(() => {
     displayJoke();
     getCategoryList();
-    getJokeList();
   }, []);
 
   return (
     <div className="box">
-      <p>{joke}</p>
-      <button onClick={displayJoke}>Draw a {person} joke</button>
-      <select onChange={option => setCategory(option.target.value)}>
-        <option value="" hidden>Categories</option>
-      {categoryList.map((category) => (
-        <option key={category}>{category}</option>
-      ))}
-      </select><br></br>
-      <input type="text" placeholder='Impersonate Chuck Norris' onChange={text => setPerson(text.target.value)}></input><br></br>
-      <input type="number" onChange={number => setNumber(number.target.value)}></input>
-      <button onClick={saveJokes}>Save Jokes</button>
+      <div className="content">
+        <img src={require('./chuck.jpg')} /><br></br>
+        <q>{joke}</q><br></br>
+        <select onChange={option => setCategory(option.target.value)}>
+          <option value="" hidden>Categories</option>
+        {categoryList.map((category) => (
+          <option key={category}>{category}</option>
+        ))}
+        </select><br></br>
+        <button onClick={displayJoke}>Draw a {person} joke</button><br></br>
+        <input type="text" placeholder="Impersonate Chuck Norris" onChange={text => setPerson(text.target.value)}></input><br></br>
+        <input type="number" value={number} onChange={number => setNumber(number.target.value)}></input>
+        <button onClick={saveJokes}>Save Jokes</button>
+      </div>
     </div>
   );
 }

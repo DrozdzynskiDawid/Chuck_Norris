@@ -14,4 +14,27 @@ code {
 
 .box{
   margin:auto;
+  position:absolute;
+  background-color:lightgray;
+  border: 1px black solid;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content{
+  margin:auto;
+  width:30%;
+  height:75%;
+  background-color: red;
+  align-items: center;
+  justify-content: center;
+}
+
+img{
+  width:90%;
+  margin:auto;
 }
