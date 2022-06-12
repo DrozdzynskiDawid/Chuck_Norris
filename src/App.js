@@ -56,20 +56,30 @@ function App() {
   }, []);
 
   return (
-    <div className="box">
-      <div className="content">
-        <img src={require('./chuck.jpg')} /><br></br>
-        <q>{joke}</q><br></br>
-        <select onChange={option => setCategory(option.target.value)}>
-          <option value="" hidden>Categories</option>
-        {categoryList.map((category) => (
-          <option key={category}>{category}</option>
-        ))}
-        </select><br></br>
-        <button onClick={displayJoke}>Draw a {person} joke</button><br></br>
-        <input type="text" placeholder="Impersonate Chuck Norris" onChange={text => setPerson(text.target.value)}></input><br></br>
-        <input type="number" value={number} onChange={number => setNumber(number.target.value)}></input>
-        <button onClick={saveJokes}>Save Jokes</button>
+    <div className="container align-items-center">
+      <div className="row vertical-center-row">
+      <div className="col-md-4 offset-md-4">
+        <div className="d-grid gap-2">
+          <img className="img-fluid" src={require('./chuck.jpg')} />
+          <q className="text-center fw-bold fs-6 fst-italic mb-3">{joke}</q>
+          <select className="form-select mb-1" onChange={option => setCategory(option.target.value)}>
+            <option value="" hidden>Categories</option>
+            <option value="" disabled>Select category</option>
+              {categoryList.map((category) => (
+                <option key={category}>{category.charAt(0).toUpperCase() + category.slice(1)}</option>
+              ))}
+          </select>
+          <div className="form-floating mb-3">
+            <input type="text" className="form-control" id="floatingInput" placeholder="Impersonate Chuck Norris" onChange={text => setPerson(text.target.value)}></input>
+            <label for="floatingInput">Impersonate Chuck Norris</label>
+          </div>
+          <button className="btn btn-secondary" onClick={displayJoke}>Draw a random {person} joke</button>
+          <div className="">
+            <input className="" type="number" value={number} onChange={number => setNumber(number.target.value)}></input>
+            <button className="btn btn-outline-secondary ms-5" onClick={saveJokes}>Save Jokes</button>  
+          </div>        
+          </div>
+        </div>
       </div>
     </div>
   );
