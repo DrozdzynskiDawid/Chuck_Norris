@@ -30,10 +30,22 @@ body{
   background-color:rgb(39, 39, 41);
 }
 
+.btn-outline-secondary{
+  color:rgb(39, 39, 41);
+}
+
 .gap-2{
   margin:30px;
 }
 
 .img-fluid{
   border-radius:5px;
+}
+
+.form-select{
+  border-color: black;
+}
+
+.form-control{
+  border-color: black;
 }

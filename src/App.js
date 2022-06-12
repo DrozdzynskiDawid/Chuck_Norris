@@ -4,6 +4,7 @@ import './App.css';
 const JOKE_API = 'http://api.icndb.com/jokes/random';
 const CAT_API = 'http://api.icndb.com/categories';
 
+
 function App() {
   const [joke, setJoke] = useState('');
   const [category, setCategory] = useState('" ",nerdy, explicit');
@@ -12,11 +13,18 @@ function App() {
   const [categoryList, setCategoryList] = useState([]);
   const [number, setNumber] = useState(0);
   const [jokeList, setJokeList] = useState([]);
+  const [isNameChanged, setChange] = useState(false);
 
   const displayJoke = () => {
     fetch(JOKE_API+'?firstName='+words[0]+'&lastName='+words[1]+'&limitTo=['+category+']')
      .then(res => res.json())
      .then(data => setJoke(data.value.joke))
+    if(words[0] == 'Chuck' && words[1] == 'Norris'){
+      setChange(false);
+    }
+    else{
+      setChange(true);
+    }
   };
 
   const getCategoryList = () => {
@@ -55,14 +63,19 @@ function App() {
     getCategoryList();
   }, []);
 
+
   return (
     <div className="container align-items-center">
       <div className="row vertical-center-row">
       <div className="col-md-4 offset-md-4">
         <div className="d-grid gap-2">
-          <img className="img-fluid" src={require('./chuck.jpg')} />
+          {isNameChanged ? (
+              <img className="img-fluid" src={require('./unknown.jpg')} />
+          ) : (
+            <img className="img-fluid" src={require('./chuck.jpg')} />
+          )}
           <q className="text-center fw-bold fs-6 fst-italic mb-3">{joke}</q>
-          <select className="form-select mb-1" onChange={option => setCategory(option.target.value)}>
+          <select className="form-select mb-1" onChange={option => setCategory(option.target.value.toLowerCase())}>
             <option value="" hidden>Categories</option>
             <option value="" disabled>Select category</option>
               {categoryList.map((category) => (
@@ -74,7 +87,7 @@ function App() {
             <label for="floatingInput">Impersonate Chuck Norris</label>
           </div>
           <button className="btn btn-secondary" onClick={displayJoke}>Draw a random {person} joke</button>
-          <div className="">
+          <div className="form-control-sm">
             <input className="" type="number" value={number} onChange={number => setNumber(number.target.value)}></input>
             <button className="btn btn-outline-secondary ms-5" onClick={saveJokes}>Save Jokes</button>  
           </div>        
