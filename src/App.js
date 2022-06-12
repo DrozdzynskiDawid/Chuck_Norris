@@ -19,7 +19,7 @@ function App() {
     fetch(JOKE_API+'?firstName='+words[0]+'&lastName='+words[1]+'&limitTo=['+category+']')
      .then(res => res.json())
      .then(data => setJoke(data.value.joke))
-    if(words[0] == 'Chuck' && words[1] == 'Norris'){
+    if(words[0] === 'Chuck' && words[1] === 'Norris'){
       setChange(false);
     }
     else{
@@ -65,31 +65,31 @@ function App() {
 
 
   return (
-    <div className="container align-items-center">
+    <div className="container align-items-center mt-5">
       <div className="row vertical-center-row">
-      <div className="col-md-4 offset-md-4">
-        <div className="d-grid gap-2">
+      <div className="col-md-4 offset-md-4 bg-light rounded shadow">
+        <div className="d-grid gap-2 mx-4 my-4">
           {isNameChanged ? (
-              <img className="img-fluid" src={require('./unknown.jpg')} />
+              <img className="img-fluid rounded" src={require('./unknown.jpg')} />
           ) : (
-            <img className="img-fluid" src={require('./chuck.jpg')} />
+            <img className="img-fluid rounded" src={require('./chuck.jpg')} />
           )}
           <q className="text-center fw-bold fs-6 fst-italic mb-3">{joke}</q>
-          <select className="form-select mb-1" onChange={option => setCategory(option.target.value.toLowerCase())}>
+          <select className="form-select mb-1 border border-dark" onChange={option => setCategory(option.target.value.toLowerCase())}>
             <option value="" hidden>Categories</option>
             <option value="" disabled>Select category</option>
               {categoryList.map((category) => (
-                <option key={category}>{category.charAt(0).toUpperCase() + category.slice(1)}</option>
+                <option key={category}><p>{category.charAt(0).toUpperCase() + category.slice(1)}</p></option>
               ))}
           </select>
           <div className="form-floating mb-3">
-            <input type="text" className="form-control" id="floatingInput" placeholder="Impersonate Chuck Norris" onChange={text => setPerson(text.target.value)}></input>
+            <input type="text" className="form-control border border-dark" id="floatingInput" placeholder="Impersonate Chuck Norris" onChange={text => setPerson(text.target.value)}></input>
             <label for="floatingInput">Impersonate Chuck Norris</label>
           </div>
-          <button className="btn btn-secondary fw-bold" onClick={displayJoke}>Draw a random {person} joke</button>
+          <button className="btn btn-secondary mb-3 p-2 fw-bold bg-dark" onClick={displayJoke}>Draw a random {person} joke</button>
           <div className="form-control-sm">
-            <input className="" type="number" value={number} onChange={number => setNumber(number.target.value)}></input>
-            <button className="btn btn-outline-secondary ms-5" onClick={saveJokes}>Save Jokes</button>  
+            <input className="col-md form-control-sm" type="number" value={number} onChange={number => setNumber(number.target.value)}></input>
+            <button className="btn btn-outline-secondary ms-5 col-md text-dark" onClick={saveJokes}>Save Jokes</button>  
           </div>        
           </div>
         </div>

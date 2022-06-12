@@ -15,37 +15,3 @@ code {
 body{
   background-color: rgb(239, 238, 238);
 }
-
-.container{
-  margin-top:5%;
-}
-
-.col-md-4{
-  background-color: white;
-  border-radius:10px;
-  box-shadow:3px 3px 10px lightgray;
-}
-
-.btn-secondary{
-  background-color:rgb(39, 39, 41);
-}
-
-.btn-outline-secondary{
-  color:rgb(39, 39, 41);
-}
-
-.gap-2{
-  margin:30px;
-}
-
-.img-fluid{
-  border-radius:5px;
-}
-
-.form-select{
-  border-color: black;
-}
-
-.form-control{
-  border-color: black;
-}
