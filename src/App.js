@@ -86,7 +86,7 @@ function App() {
             <input type="text" className="form-control" id="floatingInput" placeholder="Impersonate Chuck Norris" onChange={text => setPerson(text.target.value)}></input>
             <label for="floatingInput">Impersonate Chuck Norris</label>
           </div>
-          <button className="btn btn-secondary" onClick={displayJoke}>Draw a random {person} joke</button>
+          <button className="btn btn-secondary fw-bold" onClick={displayJoke}>Draw a random {person} joke</button>
           <div className="form-control-sm">
             <input className="" type="number" value={number} onChange={number => setNumber(number.target.value)}></input>
             <button className="btn btn-outline-secondary ms-5" onClick={saveJokes}>Save Jokes</button>  
