@@ -28,11 +28,6 @@ body{
 
 .btn-secondary{
   background-color:rgb(39, 39, 41);
-
-}
-
-.form-control::-webkit-input-placeholder {
-  color: red;
 }
 
 .gap-2{
