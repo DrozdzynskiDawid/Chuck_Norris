@@ -4,22 +4,21 @@ import './App.css';
 const JOKE_API = 'http://api.icndb.com/jokes/random';
 const CAT_API = 'http://api.icndb.com/categories';
 
-
 function App() {
   const [joke, setJoke] = useState('');
   const [category, setCategory] = useState('" ",nerdy, explicit');
   const [person, setPerson] = useState('Chuck Norris');
-  const words = person.split(' ');
+  const splittedPerson = person.split(' ');
   const [categoryList, setCategoryList] = useState([]);
   const [number, setNumber] = useState(0);
   const [jokeList, setJokeList] = useState([]);
   const [isNameChanged, setChange] = useState(false);
 
   const displayJoke = () => {
-    fetch(JOKE_API+'?firstName='+words[0]+'&lastName='+words[1]+'&limitTo=['+category+']')
+    fetch(JOKE_API+'?firstName='+splittedPerson[0]+'&lastName='+splittedPerson[1]+'&limitTo=['+category+']')
      .then(res => res.json())
      .then(data => setJoke(data.value.joke))
-    if(words[0] === 'Chuck' && words[1] === 'Norris'){
+    if(splittedPerson[0] === 'Chuck' && splittedPerson[1] === 'Norris'){
       setChange(false);
     }
     else{
@@ -51,7 +50,6 @@ function App() {
   };
   
   const saveJokes = () => {
-    getJokeList();
     for (let i = 0; i < jokeList.length; i++) {
       jokeList[i] = jokeList[i].joke+'\n'
     }
@@ -69,9 +67,9 @@ function App() {
       <div className="col-md-4 offset-md-4 bg-light rounded shadow">
         <div className="d-grid gap-2 mx-4 my-4">
             {isNameChanged ? (
-                <img className="img-fluid rounded" src={require('./unknown.jpg')} />
+                <img className="img-fluid rounded" src={require('./unknown.jpg')} alt="image_unknown" />
             ) : (
-              <img className="img-fluid rounded" src={require('./chuck.jpg')} />
+              <img className="img-fluid rounded" src={require('./chuck.jpg')} alt="image_Chuck" />
             )}
             <q className="text-center fw-bold fs-6 fst-italic mb-3">{joke}</q>
             <select className="form-select mb-1 border border-dark" onChange={option => setCategory(option.target.value.toLowerCase())}>
@@ -86,9 +84,9 @@ function App() {
               <label for="floatingInput">Impersonate Chuck Norris</label>
             </div>
             <button className="btn btn-secondary mb-3 p-2 fw-bold bg-dark" onClick={displayJoke}>Draw a random {person} joke</button>
-            <div className="form-control-sm">
+            <div className="form-control-sm" onClick={getJokeList}>
               <input className="form-control-sm" type="number" value={number} onChange={number => setNumber(number.target.value)}></input>
-              <button className="btn btn-outline-secondary ms-5 px-4 text-dark" onClick={saveJokes}>Save Jokes</button>  
+              <button className="btn btn-outline-secondary ms-2 px-4 text-dark" onClick={saveJokes}>Save Jokes</button>  
             </div>        
           </div>
         </div>
