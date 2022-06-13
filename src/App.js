@@ -51,7 +51,7 @@ function App() {
   
   const saveJokes = () => {
     for (let i = 0; i < jokeList.length; i++) {
-      jokeList[i] = jokeList[i].joke+'\n'
+      jokeList[i] = (i+1)+'. '+jokeList[i].joke+'\n'
     }
     downloadTxtFile();
   }
@@ -85,7 +85,7 @@ function App() {
             </div>
             <button className="btn btn-secondary mb-3 p-2 fw-bold bg-dark" onClick={displayJoke}>Draw a random {person} joke</button>
             <div className="form-control-sm" onClick={getJokeList}>
-              <input className="form-control-sm" type="number" value={number} onChange={number => setNumber(number.target.value)}></input>
+              <input className="form-control-sm" type="number" min="1" max="100" value={number} onChange={number => setNumber(number.target.value)}></input>
               <button className="btn btn-outline-secondary ms-2 px-4 text-dark" onClick={saveJokes}>Save Jokes</button>  
             </div>        
           </div>
